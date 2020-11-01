@@ -1,22 +1,25 @@
 <template>
     <div id="app" v-on:click="change">
         <img src="../../img/logo.png">
-        <h1>{{ appData.msg }}</h1>
-        <h2>page1</h2>
+        <h1>{{ msg }}</h1>
+        <h2>page2</h2>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'app2',
-        props: ['appData'],
+        name: 'app',
         methods: {
             change (event) {
-                // `event` 是原生 DOM 事件
-                if (event) {
-                    alert(event.target.tagName)
-                }
-                this.appData.msg = 'changed';
+                this.$store.dispatch('setData', 'hello click');
+            }
+        },
+        /**
+         * 动态类型数据
+         */
+        computed: {
+            msg () {
+                return this.$store.state.msg
             }
         }
     }
